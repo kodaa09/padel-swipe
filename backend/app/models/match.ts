@@ -43,7 +43,7 @@ export default class Match extends BaseModel {
   declare clubId: string
 
   @belongsTo(() => User, {
-    foreignKey: 'creator_id',
+    foreignKey: 'creatorId',
   })
   declare creator: BelongsTo<typeof User>
 
