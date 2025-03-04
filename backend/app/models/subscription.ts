@@ -1,7 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, belongsTo } from '@adonisjs/lucid/orm'
+import { BaseModel, column, belongsTo, beforeCreate } from '@adonisjs/lucid/orm'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import User from '#models/user'
+import { randomUUID } from 'node:crypto'
 
 export default class Subscription extends BaseModel {
   @column({ isPrimary: true })
@@ -24,4 +25,9 @@ export default class Subscription extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  @beforeCreate()
+  static assignUuid(subscription: Subscription) {
+    subscription.id = randomUUID()
+  }
 }

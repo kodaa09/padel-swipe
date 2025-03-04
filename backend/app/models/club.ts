@@ -1,7 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
+import { BaseModel, beforeCreate, column, hasMany } from '@adonisjs/lucid/orm'
 import type { HasMany } from '@adonisjs/lucid/types/relations'
 import Match from '#models/match'
+import { randomUUID } from 'node:crypto'
 
 export default class Club extends BaseModel {
   @column({ isPrimary: true })
@@ -36,4 +37,9 @@ export default class Club extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  @beforeCreate()
+  static assignUuid(club: Club) {
+    club.id = randomUUID()
+  }
 }
