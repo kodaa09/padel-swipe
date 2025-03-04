@@ -3,7 +3,7 @@ import User from '#models/user'
 
 export default class AuthController {
   async register({ request }: HttpContext) {
-    const data = request.only(['email', 'password', 'fullName'])
+    const data = request.only(['email', 'password', 'firstname', 'lastname'])
     const user = await User.create(data)
 
     return User.accessTokens.create(user)
