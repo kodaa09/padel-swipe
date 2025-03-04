@@ -1,6 +1,8 @@
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+const ClubsController = () => import('#controllers/clubs_controller')
 const AuthController = () => import('#controllers/auth_controller')
+const MatchesController = () => import('#controllers/matches_controller')
 
 router
   .group(() => {
@@ -8,5 +10,19 @@ router
     router.post('/login', [AuthController, 'login'])
     router.delete('/logout', [AuthController, 'logout']).use(middleware.auth())
     router.get('/me', [AuthController, 'me'])
+
+    router.get('/clubs', [ClubsController, 'index'])
+    router.get('/clubs/:id', [ClubsController, 'show'])
+    router.post('/clubs', [ClubsController, 'store'])
+    router.put('/clubs/:id', [ClubsController, 'update'])
+    // router.delete('/clubs/:id', [ClubsController, 'destroy'])
+
+    router.get('/matches', [MatchesController, 'index'])
+    router.get('/matches/:id', [MatchesController, 'show'])
+    router.post('/matches', [MatchesController, 'store']).middleware(middleware.auth())
+    router.put('/matches/:id', [MatchesController, 'update']).middleware(middleware.auth())
+    router.delete('/matches/:id', [MatchesController, 'destroy']).middleware(middleware.auth())
+    router.post('/matches/:id/join', [MatchesController, 'join']).middleware(middleware.auth())
+    router.post('/matches/:id/leave', [MatchesController, 'leave']).middleware(middleware.auth())
   })
   .prefix('/api')
