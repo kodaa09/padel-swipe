@@ -49,7 +49,7 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare matches: ManyToMany<typeof Match>
 
   @hasMany(() => Match, {
-    foreignKey: 'creator_id',
+    foreignKey: 'creatorId',
   })
   declare createdMatches: HasMany<typeof Match>
 

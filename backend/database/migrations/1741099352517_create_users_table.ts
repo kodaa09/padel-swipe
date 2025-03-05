@@ -12,6 +12,7 @@ export default class extends BaseSchema {
       table.string('password').notNullable()
       table.enum('subscription', ['free', 'premium']).defaultTo('free')
       table.integer('elo').defaultTo(100)
+      table.enum('level', ['1', '2', '3', '3+', '4', '4+', '5', '5+']).defaultTo('1')
       table.integer('matches_created_this_month').defaultTo(0)
 
       table.timestamp('created_at').notNullable()
