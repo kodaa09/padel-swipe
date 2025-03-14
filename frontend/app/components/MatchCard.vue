@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <ULink href="/match/1">
+  <NuxtLink href="me">
     <UCard class="transition-all hover:shadow-md">
       <div class="flex items-center justify-between mb-4">
         <div>
@@ -11,7 +11,7 @@
             <span class="text-sm text-gray-500">10 Mars 2025</span>
           </div>
         </div>
-        <UBadge :color="true ? 'green' : 'amber'">
+        <UBadge :color="true ? 'primary' : 'error'">
           {{ true ? "Terrain réservé" : "Réservation en attente" }}
         </UBadge>
       </div>
@@ -38,10 +38,10 @@
       <div class="flex items-center justify-between">
         <div class="flex gap-2">
           <UBadge color="primary" variant="soft">Niveau 3</UBadge>
-          <UBadge color="gray" variant="soft">3 places</UBadge>
+          <UBadge color="neutral" variant="soft">3 places</UBadge>
         </div>
         <UIcon name="i-material-symbols:arrow-right-alt" class="w-5 h-5" />
       </div>
     </UCard>
-  </ULink>
+  </NuxtLink>
 </template>

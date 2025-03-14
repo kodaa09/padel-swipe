@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div>
-    <h1>Me</h1>
+  <div class="h-[calc(100vh-20rem)]">
+    <LoginForm />
   </div>
 </template>

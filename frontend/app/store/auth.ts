@@ -62,9 +62,10 @@ export const useAuthStore = defineStore("auth", () => {
       user.value = result;
       return user.value;
     } catch (error) {
+      console.error(error);
       token.value = null;
       user.value = null;
-      if (process.client) {
+      if (import.meta.client) {
         localStorage.removeItem("token");
       }
       return null;

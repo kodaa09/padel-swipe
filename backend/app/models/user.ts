@@ -37,7 +37,7 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare elo: number
 
   @column()
-  declare level: '1' | '2' | '3' | '3+' | '4' | '4+' | '5' | '5+'
+  declare level: '1' | '2' | '3' | '3+' | '4' | '4+' | '5' | '5+' | '6' | '6+' | '7' | '7+' | '8'
 
   @column()
   declare matchesCreatedThisMonth: number

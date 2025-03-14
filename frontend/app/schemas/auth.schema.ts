@@ -13,7 +13,23 @@ export const signupSchema = z.object({
   password: z
     .string({ required_error: "Le mot de passe est obligatoire" })
     .min(4, { message: "Le mot de passe doit contenir au moins 4 caractères" }),
-  level: z.enum(["1", "2", "3", "3+", "4", "4+", "5", "5+"]).nullable(),
+  level: z
+    .enum([
+      "1",
+      "2",
+      "3",
+      "3+",
+      "4",
+      "4+",
+      "5",
+      "5+",
+      "6",
+      "6+",
+      "7",
+      "7+",
+      "8",
+    ])
+    .nullable(),
 });
 
 export const loginSchema = z.object({
