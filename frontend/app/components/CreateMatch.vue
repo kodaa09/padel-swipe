@@ -1,5 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <h1>Home page</h1>
+  <div>
+    <h1>Create Match</h1>
+  </div>
 </template>
