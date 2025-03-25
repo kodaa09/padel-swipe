@@ -3,7 +3,7 @@ import User from '#models/user'
 
 export default class AuthController {
   async register({ request, response }: HttpContext) {
-    const data = request.only(['email', 'password', 'firstname', 'lastname', 'level'])
+    const data = request.only(['email', 'password', 'firstname', 'lastname', 'level', 'phone'])
 
     if (await User.findBy('email', data.email)) {
       return response.status(400).json({
@@ -41,8 +41,20 @@ export default class AuthController {
     await User.accessTokens.delete(user, user.currentAccessToken.identifier)
   }
 
-  async me({ auth }: HttpContext) {
-    await auth.check()
-    return { user: auth.user }
+  async me({ auth, response }: HttpContext) {
+    const res = await auth.check()
+
+    if (!res) {
+      return response.status(401).json({
+        status: 'error',
+        message: 'Unauthorized',
+      })
+    }
+
+    return response.status(200).json({
+      status: 'success',
+      message: 'Utilisateur connecté',
+      user: auth.user,
+    })
   }
 }

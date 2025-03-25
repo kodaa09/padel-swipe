@@ -16,9 +16,6 @@ export default class Match extends BaseModel {
   declare status: 'waiting' | 'playing' | 'finished'
 
   @column()
-  declare isBooked: boolean
-
-  @column()
   declare price: number
 
   @column()
@@ -34,7 +31,7 @@ export default class Match extends BaseModel {
   declare courtNumber: string | null
 
   @column()
-  declare level: '1' | '2' | '3' | '3+' | '4' | '4+' | '5' | '5+'
+  declare level: string
 
   @column()
   declare creatorId: string

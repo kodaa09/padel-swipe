@@ -23,9 +23,8 @@ export default class MatchesController {
     const matchData = request.only([
       'date',
       'status',
-      'isBooked',
       'price',
-      'playersMax',
+      'playersCount',
       'duration',
       'courtNumber',
       'level',
@@ -99,9 +98,8 @@ export default class MatchesController {
     const matchData = request.only([
       'date',
       'status',
-      'isBooked',
       'price',
-      'playersMax',
+      'playersCount',
       'duration',
       'courtNumber',
       'level',

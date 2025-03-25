@@ -18,6 +18,7 @@ async function onSubmit(event: FormSubmitEvent<LoginSchema>) {
 
   try {
     await authStore.login(event.data);
+    navigateTo("/matchs");
     toast.add({ title: "Connexion réussie" });
     isOpen.value = false;
   } catch (error) {

@@ -61,10 +61,9 @@ async function onSubmit(event: FormSubmitEvent<SignupSchema>) {
   isLoading.value = true;
 
   try {
-    const res = await authStore.register(event.data);
-    console.log(res);
+    await authStore.register(event.data);
     resetForm();
-    // navigateTo("/");
+    navigateTo("/matchs");
     // toast.add({ title: "Inscription réussie" });
   } catch (error) {
     // @ts-expect-error error.response is not typed

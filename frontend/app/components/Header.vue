@@ -31,7 +31,7 @@ const authStore = useAuthStore();
           </li>
           <li>
             <ULink
-              to="/padel"
+              to="/club"
               active-class="text-primary-500"
               inactive-class="text-black"
               >Ajoute ton club</ULink

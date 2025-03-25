@@ -18,7 +18,7 @@ export default class Club extends BaseModel {
   declare city: string
 
   @column()
-  declare zip_code: string
+  declare zipCode: string
 
   @column()
   declare country: string

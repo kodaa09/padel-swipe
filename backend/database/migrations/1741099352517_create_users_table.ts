@@ -10,6 +10,8 @@ export default class extends BaseSchema {
       table.string('lastname').notNullable()
       table.string('email', 254).notNullable().unique()
       table.string('password').notNullable()
+      table.string('phone').nullable()
+      table.enum('role', ['player', 'teacher', 'club']).defaultTo('player')
       table.enum('subscription', ['free', 'premium']).defaultTo('free')
       table.integer('elo').defaultTo(100)
       table
