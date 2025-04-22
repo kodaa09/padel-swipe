@@ -6,13 +6,6 @@ export const useAuthStore = defineStore("auth", () => {
   const user = useState("user", (): null | UserType => null);
   const token = useState("token", (): null | string => null);
 
-  if (import.meta.client) {
-    const storedToken = localStorage.getItem("token");
-    if (storedToken) {
-      token.value = storedToken;
-    }
-  }
-
   async function api(
     method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH",
     url: string,
@@ -52,14 +45,14 @@ export const useAuthStore = defineStore("auth", () => {
   }
 
   async function me() {
+    checkToken();
     try {
       if (!token.value) {
         user.value = null;
         return null;
       }
-
       const result = await api("GET", "me");
-      user.value = result;
+      user.value = result.user;
       return user.value;
     } catch (error) {
       console.error(error);
@@ -72,6 +65,15 @@ export const useAuthStore = defineStore("auth", () => {
     }
   }
 
+  function checkToken() {
+    if (import.meta.client) {
+      const storedToken = localStorage.getItem("token");
+      if (storedToken) {
+        token.value = storedToken;
+      }
+    }
+  }
+
   async function logout() {
     await api("DELETE", "logout");
     token.value = null;
@@ -81,7 +83,7 @@ export const useAuthStore = defineStore("auth", () => {
     }
   }
 
-  return { user, login, register, logout, me };
+  return { user, token, login, register, logout, me };
 });
 
 export type UserType = {

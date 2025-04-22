@@ -1,5 +1,9 @@
+import { useAuthStore } from "~/store/auth.js";
+import type { Club } from "./club";
+
 export const useMatchs = () => {
   const config = useRuntimeConfig();
+  const authStore = useAuthStore();
 
   const levels = [
     "1",
@@ -21,16 +25,50 @@ export const useMatchs = () => {
     { label: "1 heure 30", value: 90 },
     { label: "2 heures", value: 120 },
   ];
-  const clubs = [
-    { label: "Padel horizon", value: "1" },
-    { label: "Esprit padel", value: "2" },
-    { label: "4padel Creteil", value: "3" },
-  ];
 
   const fetchMatchs = async () => {
-    const { data } = await useFetch(`${config.public.apiBase}/matchs`);
+    const { data } = await useFetch<MatchsResponse>(
+      `${config.public.apiBase}/matches`
+    );
     return data.value;
   };
 
-  return { levels, durations, clubs, fetchMatchs };
+  const createMatch = async (match: Match) => {
+    const token = authStore.token;
+    const data = await $fetch(`${config.public.apiBase}/matches`, {
+      method: "POST",
+      body: match,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return data;
+  };
+
+  return { levels, durations, fetchMatchs, createMatch };
 };
+
+export interface MatchResponse {
+  data: Match;
+  message: string;
+  status: string;
+}
+
+export interface MatchsResponse {
+  data: Match[];
+  message: string;
+  status: string;
+}
+
+export interface Match {
+  id: string;
+  date: string;
+  price: number;
+  duration: number;
+  level: string[];
+  clubId: string;
+  club: Club;
+  courtNumber: number;
+  playersCount: number;
+}
